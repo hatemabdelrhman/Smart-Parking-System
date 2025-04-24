@@ -1,0 +1,11 @@
+{
+  "name": "smart-parking-system",
+  "version": "1.0.0",
+  "description": "\"This is a project aiming to build a system to fine available parking spots, city sample: 'Madinaty, Egypt'\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brogrammers",
+  "license": "ISC"
+}
