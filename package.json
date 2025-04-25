@@ -7,5 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brogrammers",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hatemabdelrhman/Smart-Parking-System.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hatemabdelrhman/Smart-Parking-System/issues"
+  },
+  "homepage": "https://github.com/hatemabdelrhman/Smart-Parking-System#readme"
 }
