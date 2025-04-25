@@ -1,30 +1,33 @@
 """ 
 TODO: Generate sample data in Madinaty and perform ML algorithms (Gradient Descent) on it to predict where parking will be availble within 6 hours from request
 """
+import csv
 import random
 from datetime import datetime, timedelta, timezone
 
-def generate_sql_insert(num_spots=30):
-    insert_statements = []
-    
+def generate_csv_data(num_spots=30, file_path="data/parking_data.csv"):
+    # Ensure reproducibility (optional)
+    random.seed()
+
+    # Prepare data
+    data = []
+
     for i in range(1, num_spots + 1):
         spot_id = f'MAD-{i:03d}'  # e.g., MAD-001
         lat = round(random.uniform(30.060, 30.080), 6)
         lon = round(random.uniform(31.635, 31.655), 6)
-        status = random.choices(['available', 'occupied'], weights=[0.6, 0.4])[0]  # More available than occupied
+        status = random.choices(['available', 'occupied'], weights=[0.6, 0.4])[0]
         timestamp = (datetime.now(timezone.utc) - timedelta(minutes=random.randint(1, 60))).strftime('%Y-%m-%d %H:%M:%S')
 
-        statement = (
-            f"INSERT INTO parking_spots (spot_id, latitude, longitude, status, timestamp) "
-            f"VALUES ('{spot_id}', {lat}, {lon}, '{status}', '{timestamp}');"
-        )
-        insert_statements.append(statement)
+        data.append([spot_id, lat, lon, status, timestamp])
 
-    return "\n".join(insert_statements)
+    # Write to CSV
+    with open(file_path, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['spot_id', 'latitude', 'longitude', 'status', 'timestamp'])  # Header
+        writer.writerows(data)
 
-# Save SQL to file
-sql_script = generate_sql_insert(30)
-with open("data/parking_data.sql", "w") as file:
-    file.write(sql_script)
+    print(f"🚗 CSV dataset for Madinaty generated and saved to {file_path}.")
 
-print("🚗 SQL dataset for Madinaty generated and saved to madinaty_parking_data.sql.")
+# Generate and save
+generate_csv_data(30)
